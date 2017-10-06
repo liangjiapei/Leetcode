@@ -16,7 +16,7 @@
 
 // Method 1: Recursion Solution
 // Time: O(n)
-// Space: O(n)
+// Space: O(height)
 public int maxDepth(TreeNode root) {
   // base case
   if (root == null) {
@@ -61,7 +61,7 @@ public int maxDepth(TreeNode root) {
 
 // Method 3: Iterative DFS
 // Time: O(n)
-// Space: O(n)
+// Space: O(height)
 public int maxDepth(TreeNode root) {
   // Corner case
   if (root == null) {

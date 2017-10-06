@@ -27,6 +27,8 @@ For example, the lowest common ancestor (LCA) of nodes 2 and 8 is 6. Another exa
  */
 
 // Method 1: Recursive Solution
+// Time: O(logn)
+// Space: O(logn)
 public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
   if(root.val > p.val && root.val > q.val){
     return lowestCommonAncestor(root.left, p, q);
@@ -38,8 +40,8 @@ public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 }
 
 // Method 2: Iterative Solution
-// Time: O(n)
-// Space: O(height)
+// Time: O(logn)
+// Space: O(1)
 public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
   while ((root.val - p.val) * (root.val - q.val) > 0) {
     root = p.val < root.val ? root.left : root.right;

@@ -35,27 +35,21 @@ public boolean isSameTree(TreeNode p, TreeNode q) {
 // Space: O(height)
 public boolean isSameTree(TreeNode p, TreeNode q) {
   // Use Deque to help DFS
-  Deque<TreeNode> stackP = new LinkedList<>();
-  Deque<TreeNode> stackQ = new LinkedList<>();
-  stackP.offerLast(p);
-  stackQ.offerLast(q);
-  while (!stackP.isEmpty() && !stackQ.isEmpty()) {
-    TreeNode curP = stackP.pollLast();
-    TreeNode curQ = stackQ.pollLast();
+  Deque<TreeNode[]> stack = new LinkedList<>();
+  stack.offerLast(new TreeNode[] {p, q});
+  while (!stack.isEmpty()) {
+    TreeNode[] cur = stack.pollLast();
     // Validate
-    if (curP == null && curQ == null) {
+    if (cur[0] == null && cur[1] == null) {
       continue;
-    } else if (curP == null || curQ == null) {
+    } else if (cur[0] == null || cur[1] == null) {
       return false;
-    } else if (curP.val != curQ.val) {
+    } else if (cur[0].val != cur[1].val) {
       return false;
     }
     // Offer children nodes
-    stackP.offerLast(curP.left);
-    stackP.offerLast(curP.right);
-
-    stackQ.offerLast(curQ.left);
-    stackQ.offerLast(curQ.right);
+    stack.offerLast(new TreeNode[] {cur[0].left, cur[1].left});
+    stack.offerLast(new TreeNode[] {cur[0].right, cur[1].right});
   }
   return true;
 }
@@ -66,27 +60,21 @@ public boolean isSameTree(TreeNode p, TreeNode q) {
 // Space: O(height)
 public boolean isSameTree(TreeNode p, TreeNode q) {
   // Use Deque to help DFS
-  Queue<TreeNode> queueP = new LinkedList<>();
-  Queue<TreeNode> queueQ = new LinkedList<>();
-  queueP.offer(p);
-  queueQ.offer(q);
-  while (!queueP.isEmpty() && !queueQ.isEmpty()) {
-    TreeNode curP = queueP.poll();
-    TreeNode curQ = queueQ.poll();
+  Queue<TreeNode[]> queue = new LinkedList<>();
+  queue.offer(new TreeNode[] {p, q});
+  while (!queue.isEmpty()) {
+    TreeNode[] cur = queue.poll();
     // Validate
-    if (curP == null && curQ == null) {
+    if (cur[0] == null && cur[1] == null) {
       continue;
-    } else if (curP == null || curQ == null) {
+    } else if (cur[0] == null || cur[1] == null) {
       return false;
-    } else if (curP.val != curQ.val) {
+    } else if (cur[0].val != cur[1].val) {
       return false;
     }
     // Offer children nodes
-    queueP.offer(curP.left);
-    queueP.offer(curP.right);
-
-    queueQ.offer(curQ.left);
-    queueQ.offer(curQ.right);
+    queue.offer(new TreeNode[] {cur[0].left, cur[1].left});
+    queue.offer(new TreeNode[] {cur[0].right, cur[1].right});
   }
   return true;
 }

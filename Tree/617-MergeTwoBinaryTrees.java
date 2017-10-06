@@ -23,6 +23,15 @@ Merged tree:
 Note: The merging process must start from the root nodes of both trees.
 */
 
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
 
 // Method 1: Recursive Solution
 // Time: O(n)

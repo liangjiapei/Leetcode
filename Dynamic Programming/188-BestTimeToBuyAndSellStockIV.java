@@ -36,3 +36,39 @@ public int maxProfit(int k, int[] prices) {
   }
   return dp[k][n-1];
 }
+
+// Time complexity: O(kn) where k is k, n is the number of prices
+// Space complexity: O(n)
+public int maxProfit(int k, int[] prices) {
+  int n = prices.length;
+  if (k >= n/2) {
+    // fast case because there are [0, n/2] continuous increases
+    int maxProfit = 0;
+    for (int i = 1; i < n; i++) {
+      int diff = prices[i] - prices[i-1];
+      if (diff > 0) {
+        maxProfit += diff;
+      }
+    }
+    return maxProfit;
+  }
+
+  // Each element cur[j] means the max profit of at current number of transactions until day j
+  int[] cur = new int[n];
+  // Each element prev[j] means the max profit of at previous number of transactions until day j
+  int[] prev = new int[n];
+
+  for (int i = 1; i <= k; i++) {
+    int localMax = -prices[0];
+
+    for (int j = 1; j < n; j++) {
+      localMax = Math.max(localMax, prev[j-1] - prices[j-1]);
+      cur[j] = Math.max(cur[j-1], localMax + prices[j]);
+    }
+
+    for (int j = 1; j < n; j++) {
+      prev[j] = cur[j];
+    }
+  }
+  return cur[n-1];
+}
